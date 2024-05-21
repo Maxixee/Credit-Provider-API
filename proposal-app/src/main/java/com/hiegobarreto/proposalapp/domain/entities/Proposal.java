@@ -13,20 +13,20 @@ public class Proposal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "amount", nullable = false)
-    private Double amount;
-    @Column(name = "payment_term", nullable = false)
-    private int paymentTerm;
-    @Column(name = "approved", nullable = false)
-    private Boolean approved;
-    @Column(name = "integrated", nullable = false)
-    private boolean integrated;
-    @Column(name = "note", nullable = false)
-    private String note;
-    @OneToOne
+    @Column(name = "amount")
+    private Double valorSolicitado;
+    @Column(name = "payment_term")
+    private int prazoPagamento;
+    @Column(name = "approved")
+    private Boolean aprovada;
+    @Column(name = "integrated")
+    private boolean integrada;
+    @Column(name = "note")
+    private String observacao;
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_user")
-    private User user;
+    private User usuario;
 
 }

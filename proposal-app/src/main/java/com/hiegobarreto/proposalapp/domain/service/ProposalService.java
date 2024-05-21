@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProposalService {
@@ -21,5 +23,9 @@ public class ProposalService {
         proposalRepository.save(proposal);
 
         return ProposalMapper.INSTANCE.convertEntityToDto(proposal);
+    }
+
+    public List<ProposalResponseDto> getAll() {
+        return ProposalMapper.INSTANCE.convertListEntityToListDto(proposalRepository.findAll());
     }
 }

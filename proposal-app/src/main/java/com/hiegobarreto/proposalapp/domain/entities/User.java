@@ -13,18 +13,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "name", nullable = false)
-    private String name;
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-    @Column(name = "cpf", nullable = false)
+    @Column(name = "name")
+    private String nome;
+    @Column(name = "last_name")
+    private String sobrenome;
+    @Column(name = "cpf")
     private String cpf;
-    @Column(name = "phone", nullable = false)
-    private String phone;
-    @Column(name = "rent", nullable = false)
-    private Double rent;
-    @OneToOne(mappedBy = "user")
-    private Proposal proposal;
+    @Column(name = "phone")
+    private String telefone;
+    @Column(name = "rent")
+    private Double renda;
+    @OneToOne(mappedBy = "usuario")
+    private Proposal proposta;
 }

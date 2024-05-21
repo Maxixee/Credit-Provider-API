@@ -6,6 +6,9 @@ import com.hiegobarreto.proposalapp.dto.ProposalResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
@@ -17,6 +20,17 @@ public class ProposalController {
 
     @PostMapping
     public ResponseEntity<ProposalResponseDto> create(@RequestBody ProposalRequestDto requestDto){
-        return ResponseEntity.ok(this.proposalService.create(requestDto));
+        ProposalResponseDto response = this.proposalService.create(requestDto);
+
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(response.getId())
+                .toUri())
+                .body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProposalResponseDto>> getAllProposal(){
+        return ResponseEntity.ok(this.proposalService.getAll());
     }
 }

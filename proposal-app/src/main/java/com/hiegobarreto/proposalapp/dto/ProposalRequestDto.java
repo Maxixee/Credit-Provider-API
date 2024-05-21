@@ -8,11 +8,11 @@ import lombok.*;
 @Setter
 public class ProposalRequestDto {
 
-    private String name;
-    private String lastName;
-    private String phone;
+    private String nome;
+    private String sobrenome;
+    private String telefone;
     private String cpf;
-    private Double rent;
-    private Double amount;
-    private int paymentTerm;
+    private Double renda;
+    private Double valorSolicitado;
+    private int prazoPagamento;
 }

@@ -9,13 +9,13 @@ import lombok.*;
 public class ProposalResponseDto {
 
     private Long id;
-    private String name;
-    private String lastName;
-    private String phone;
+    private String nome;
+    private String sobrenome;
+    private String telefone;
     private String cpf;
-    private Double rent;
-    private Double amount;
-    private int paymentTerm;
-    private Boolean approved;
-    private String note;
+    private Double renda;
+    private String valorSolicitadoFmt;
+    private int prazoPagamento;
+    private Boolean aprovada;
+    private String observacao;
 }
