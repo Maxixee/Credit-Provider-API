@@ -1,5 +1,6 @@
 package com.hiegobarreto.proposalapp.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Proposal {
     private String observacao;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_user")
+    @JsonManagedReference
     private User usuario;
 
 }

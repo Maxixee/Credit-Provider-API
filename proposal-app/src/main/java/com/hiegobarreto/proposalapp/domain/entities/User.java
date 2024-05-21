@@ -1,5 +1,6 @@
 package com.hiegobarreto.proposalapp.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,5 +27,6 @@ public class User {
     @Column(name = "rent")
     private Double renda;
     @OneToOne(mappedBy = "usuario")
+    @JsonBackReference
     private Proposal proposta;
 }
