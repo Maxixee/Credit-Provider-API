@@ -25,6 +25,7 @@ public class RabbitMQConfiguration {
     public Queue createQueuePendingProposalMsCreditAnalysis(){
         return QueueBuilder
                 .durable("pending-proposal.ms-credit-analysis")
+                .deadLetterExchange("pending-proposal-dlx.ex")
                 .build();
     }
 
@@ -32,6 +33,7 @@ public class RabbitMQConfiguration {
     public Queue createQueuePendingProposalMsNotification(){
         return QueueBuilder
                 .durable("pending-proposal.ms-notification")
+                .deadLetterExchange("pending-proposal-dlx.ex")
                 .build();
     }
 
@@ -39,6 +41,7 @@ public class RabbitMQConfiguration {
     public Queue createQueueCompletedProposalMsProposal(){
         return QueueBuilder
                 .durable("completed-proposal.ms-proposal")
+                .deadLetterExchange("completed-proposal-dlx.ex")
                 .build();
     }
 
@@ -46,6 +49,7 @@ public class RabbitMQConfiguration {
     public Queue createQueueCompletedProposalMsNotification(){
         return QueueBuilder
                 .durable("completed-proposal.ms-notification")
+                .deadLetterExchange("completed-proposal-dlx.ex")
                 .build();
     }
 
@@ -105,5 +109,50 @@ public class RabbitMQConfiguration {
         rabbitTemplate.setMessageConverter(jackson2JsonMessageConverter());
 
         return rabbitTemplate;
+    }
+
+
+    // DEAD LETTER QUEUES
+    @Bean
+    public Queue createQueuePendingProposalDlq(){
+        return QueueBuilder
+                .durable("pending-proposal.dlq")
+                .build();
+    }
+
+    @Bean
+    public Queue createQueueCompletedProposalDlq(){
+        return QueueBuilder
+                .durable("completed-proposal.dlq")
+                .build();
+    }
+
+    @Bean
+    public FanoutExchange deadLetterExchangePendingProposal(){
+        return ExchangeBuilder
+                .fanoutExchange("pending-proposal-dlx.ex")
+                .build();
+    }
+
+    @Bean
+    public FanoutExchange deadLetterExchangeCompletedProposal(){
+        return ExchangeBuilder
+                .fanoutExchange("completed-proposal-dlx.ex")
+                .build();
+    }
+
+    @Bean
+    public Binding createPendindProposalDlqBinding(){
+        return BindingBuilder
+                .bind(createQueuePendingProposalDlq())
+                .to(deadLetterExchangePendingProposal());
+    }
+
+
+    @Bean
+    public Binding createCompletedProposalDlqBinding(){
+        return BindingBuilder
+                .bind(createQueueCompletedProposalDlq())
+                .to(deadLetterExchangeCompletedProposal());
     }
 }
