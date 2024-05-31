@@ -26,6 +26,7 @@ public class RabbitMQConfiguration {
         return QueueBuilder
                 .durable("pending-proposal.ms-credit-analysis")
                 .deadLetterExchange("pending-proposal-dlx.ex")
+                .maxPriority(10)
                 .build();
     }
 

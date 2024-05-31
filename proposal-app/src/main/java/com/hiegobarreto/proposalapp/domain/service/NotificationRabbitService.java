@@ -2,6 +2,7 @@ package com.hiegobarreto.proposalapp.domain.service;
 
 import com.hiegobarreto.proposalapp.domain.entities.Proposal;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,14 @@ public class NotificationRabbitService {
                        String exchange){
 
         rabbitTemplate.convertAndSend(exchange, "", proposal);
+
+    }
+
+    public void notify(Proposal proposal,
+                       String exchange,
+                       MessagePostProcessor messagePostProcessor){
+
+        rabbitTemplate.convertAndSend(exchange, "", proposal, messagePostProcessor);
 
     }
 }
