@@ -18,6 +18,9 @@ sendo essa feita com base no curso "Microsserviços com Spring e RabbitMQ + AWS"
   - ```docker run --name postgres-container -d -e POSTGRES PASSWORD-123 -e POSTGRES_DB-propostadb -p 5432:5432 postgres``` Para rodar a imagem do banco de dados postgres
   - ```docker run -d -p 5672:5672 -p 15672:15672 --name my-rabbit rabbitmq:3-management ``` Para rodar o RabbitMQ
 
+- Também é necessário possuir uma conta AWS para poder utilizar o microsserviço notification-app, e inserir a AccessKey e SecretKey no application.properties
+do mesmo 
+
 - Realizados estes comandos, basta buildar e executar o backend na sua IDE.
 
 # Documentação
@@ -48,6 +51,8 @@ You must have Docker installed to run the application locally.
   - ```docker run -d -p 80:80 --name proposta-web-front matheuspieropan/proposta-web``` To run the project front-end
   - ```docker run --name postgres-container -d -e POSTGRES PASSWORD-123 -e POSTGRES_DB-propostadb -p 5432:5432 postgres``` To run the postgres database image
   - ```docker run -d -p 5672:5672 -p 15672:15672 --name my-rabbit rabbitmq:3-management ``` To run RabbitMQ
+
+- It's also necessary to have an AWS account to be able to use the notification-app microservice, and insert the AccessKey and SecretKey in the application.properties
 
 - Once these commands have been carried out, simply build and run the backend in your IDE.
 
